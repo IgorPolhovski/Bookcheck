@@ -2,12 +2,15 @@ from rest_framework.response import Response
 from rest_framework import generics, viewsets
 from .models import Book
 from .serializers import BookSerializer, BookbyidSerializer, BookCreateSerializer
-
+from django_filters.rest_framework import DjangoFilterBackend
+from .dfilter import TitleFilter
 
 class BookViewSet(viewsets.ViewSet):
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = TitleFilter
+
     def list(self, request):
         books = Book.objects.all()
-        # the many param informs the serializer that it will be serializing more than a single article.
         serializer = BookSerializer(books, many=True)
         return Response({"books": serializer.data})
 
