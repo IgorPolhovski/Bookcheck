@@ -18,6 +18,11 @@ class BookbyidSerializer(serializers.ModelSerializer):
         model = Book
         fields = ('title', 'description', 'author_name')
 
+class BooksearcherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ('title', 'description', 'author_name')
+
 class BookCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book

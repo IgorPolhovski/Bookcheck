@@ -7,5 +7,6 @@ urlpatterns = [
     path('books/create/', BookCreateview.as_view()),
     path('books/', BookViewSet.as_view({'get': 'list'})),
     path('books/<int:id>/', BookViewSet.as_view({'get': 'article_by_id'})),
+    path('books/<str:title>/', BookViewSet.as_view({'get': 'Booksearcher'})),
 
 ]

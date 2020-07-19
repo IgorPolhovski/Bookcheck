@@ -1,18 +1,19 @@
 from rest_framework.response import Response
 from rest_framework import generics, viewsets
 from .models import Book
-from .serializers import BookSerializer, BookbyidSerializer, BookCreateSerializer
-from django_filters.rest_framework import DjangoFilterBackend
-from .dfilter import TitleFilter
+from .serializers import BookSerializer, BookbyidSerializer, BookCreateSerializer, BooksearcherSerializer
+
 
 class BookViewSet(viewsets.ViewSet):
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = TitleFilter
-
     def list(self, request):
         books = Book.objects.all()
         serializer = BookSerializer(books, many=True)
         return Response({"books": serializer.data})
+
+    def Booksearcher(self, request, title):
+        resultsearch = Book.objects.filter(title=title)
+        serializer2 = BooksearcherSerializer(resultsearch, many=True)
+        return Response({"resultsearch": serializer2.data})
 
     def article_by_id(self, request, id):
         result = Book.objects.filter(id=id)
