@@ -5,7 +5,7 @@ from .models import Book
 class CharFilterInFilter(filters.BaseInFilter, filters.CharFilter):
     pass
 
-
+filter_fields = ('title')
 class TitleFilter(filters.FilterSet):
     title = CharFilterInFilter(field_name='title', lookup_expr='in')
 
